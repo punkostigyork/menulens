@@ -1,15 +1,66 @@
+# Local credentials and environment overrides (at any directory depth)
 .env
 .env.*
 !.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# JavaScript dependencies, Next.js output and caches
 node_modules/
 .next/
+out/
+.turbo/
+.npm/
+*.tsbuildinfo
+next-env.d.ts
+
+# Python environments, bytecode, caches and package build output
 .venv/
+venv/
+env/
 __pycache__/
 *.py[cod]
 .pytest_cache/
-*.tsbuildinfo
+.mypy_cache/
+.ruff_cache/
+.tox/
+*.egg-info/
+build/
+dist/
+
+# Tests and coverage reports (keep test source files)
+coverage/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+playwright-report/
+test-results/
+
+# Local uploads, databases and backups (keep bundled demo files)
 backend/uploads/*
 !backend/uploads/.gitkeep
+/uploads/
+/backups/
+/postgres_data/
+/uploads_data/
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.sql.gz
 
-backups/
+# Logs, editor state and operating-system files
+*.log
+*.log.*
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
 .DS_Store
+._*
+Thumbs.db
+Desktop.ini
