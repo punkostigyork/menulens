@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function NotFound() {return <main className="mx-auto max-w-2xl px-6 py-24"><p className="text-sm font-semibold text-[#738348]">MenuLens</p><h1 className="mt-5 font-serif text-5xl">A wrong turn, perhaps.</h1><p className="mt-5 text-[#59645b]">This page isn't here. Let's find something good instead.</p><Link href="/" className="mt-8 inline-block rounded-full bg-[#243e32] px-6 py-3 text-white">Back to MenuLens</Link></main>;}

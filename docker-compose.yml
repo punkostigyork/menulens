@@ -1,0 +1,75 @@
+name: menulens
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-menulens}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-menulens_local}
+      POSTGRES_DB: ${POSTGRES_DB:-menulens}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+  backend:
+    build: ./backend
+    environment:
+      SEED_DEMO: ${SEED_DEMO:-true}
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://menulens:menulens_local@postgres:5432/menulens}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      MENU_AI_PROVIDER: ${MENU_AI_PROVIDER:-}
+      MENU_AI_MODEL: ${MENU_AI_MODEL:-}
+      MENU_AI_TIMEOUT_SECONDS: ${MENU_AI_TIMEOUT_SECONDS:-60}
+      MENU_AI_MAX_OUTPUT_TOKENS: ${MENU_AI_MAX_OUTPUT_TOKENS:-12000}
+      PLACES_API_KEY: ${PLACES_API_KEY:-}
+      PLACES_TIMEOUT_SECONDS: ${PLACES_TIMEOUT_SECONDS:-15}
+      MAPS_API_KEY: ${MAPS_API_KEY:-}
+      MAPS_MAP_ID: ${MAPS_MAP_ID:-DEMO_MAP_ID}
+      IMAGE_PROVIDER: ${IMAGE_PROVIDER:-}
+      IMAGE_MODEL: ${IMAGE_MODEL:-}
+      IMAGE_TIMEOUT_SECONDS: ${IMAGE_TIMEOUT_SECONDS:-180}
+      IMAGE_MAX_BYTES: ${IMAGE_MAX_BYTES:-10485760}
+      UPLOAD_DIR: /app/uploads
+      DOCUMENT_MAX_PAGES: ${DOCUMENT_MAX_PAGES:-20}
+      DOCUMENT_IMAGE_EDGE: ${DOCUMENT_IMAGE_EDGE:-1600}
+      DOCUMENT_MAX_IMAGE_PIXELS: ${DOCUMENT_MAX_IMAGE_PIXELS:-40000000}
+      DOCUMENT_MAX_TEXT_CHARS: ${DOCUMENT_MAX_TEXT_CHARS:-200000}
+      DOCUMENT_MAX_OUTPUT_BYTES: ${DOCUMENT_MAX_OUTPUT_BYTES:-16777216}
+      MAX_UPLOAD_BYTES: ${MAX_UPLOAD_BYTES:-10485760}
+      CORS_ORIGINS: ${CORS_ORIGINS:-["http://localhost:3000"]}
+    volumes:
+      - uploads_data:/app/uploads
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=4)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        MAX_UPLOAD_BYTES: ${MAX_UPLOAD_BYTES:-10485760}
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+volumes:
+  postgres_data:
+  uploads_data:

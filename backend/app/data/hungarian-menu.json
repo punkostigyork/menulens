@@ -1,0 +1,73 @@
+{
+  "restaurant_name": "Magyar Asztal - sample menu",
+  "currency": "HUF",
+  "language": "hu",
+  "sections": [
+    {
+      "name": "Soups",
+      "items": [
+        {
+          "name": "Gulyasleves",
+          "price": 2990,
+          "original_description": "A hearty Hungarian soup with beef, potatoes, carrots and paprika.",
+          "ingredients": [
+            "beef",
+            "potato",
+            "carrot",
+            "paprika"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Main courses",
+      "items": [
+        {
+          "name": "Hortobagyi husos palacsinta",
+          "price": 4590,
+          "original_description": "Savory crepes filled with beef, served with sour cream and paprika sauce.",
+          "ingredients": [
+            "beef",
+            "flour",
+            "egg",
+            "milk",
+            "sour cream",
+            "paprika"
+          ]
+        },
+        {
+          "name": "Csirkepaprikas",
+          "price": 5290,
+          "original_description": "Chicken in a creamy paprika sauce, served with small egg dumplings.",
+          "ingredients": [
+            "chicken",
+            "paprika",
+            "onion",
+            "sour cream",
+            "flour",
+            "egg"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Desserts",
+      "items": [
+        {
+          "name": "Somloi galuska",
+          "price": 2490,
+          "original_description": "Sponge cake with chocolate sauce, walnuts, raisins and whipped cream.",
+          "ingredients": [
+            "flour",
+            "egg",
+            "milk",
+            "chocolate",
+            "walnut",
+            "raisin",
+            "cream"
+          ]
+        }
+      ]
+    }
+  ]
+}
