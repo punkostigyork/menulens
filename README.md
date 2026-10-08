@@ -5,13 +5,17 @@
 This year I had the possibility to travel more around Europe. 
 Every single trip made me realize, that I do not know enough information about the culinary culture of these countries.
 I wanted to change that, so I started visiting local kitchens.
-Here can the first problem. How to decide where to eat? 
+Here came the first problem. How to decide where to eat? 
 Then came the next one. I did not undertand the menu.
 My best choice was to take a picture about it, uploade it to ChatGPT and ask it to write down shortly what each item is.
+That took lots of time. I usually got the most liked answers not the most special one.
+I needed some faster alternative.
 
 During one of these trips came the idea how easy it would be to track restaurants around my location by my preference. 
 Then taking a picture about the menu, uploading it to a website
 and then being able to read a short description what each food is. What they look like.
+Yout might say: LLMs can do that. Yes they can, but they know the preference of the many, not my preference.
+I wanted to keep the decision in my hand.
 
 I also wanted to see how fast Codex can build such an app, if I plan a short architecture of the system, write a
 specification what is should do and then give it to Codex to finish up with the coding. It was pretty fast...
